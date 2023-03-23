@@ -16,7 +16,9 @@ app.get('/', (reg, res) => {
 })
 // rota /usuarios na url no rest voce sempre usa o endpoint no plural
 // retorna todos os usuarios
-app.get('/usuarios/', (reg, res) => {
+// req - request - tudo que o usuario envia - req.params ou req.query
+// res - response - tudo que o programa responde - res.send
+app.get('/usuarios/', (req, res) => {
     res.send(
     [
         {
@@ -50,6 +52,7 @@ app.get('/usuarios/:id', (req, res) => {
 
 // novos finds
 // um find para trazer somente se o usuario e a senha estiver iguais ao cadastro
+// simulando um login
 app.get('/usuarios/:email/:senha', (req, res) => {
     const usuarios = [
         {
@@ -65,13 +68,14 @@ app.get('/usuarios/:email/:senha', (req, res) => {
             senha: '12345'
         }
     ]
+    // o req.params é uma forma de passar informaçoes para o codigo atraves da url
     // retorna o usuario que se encaixa no filtro find
     const usuario = usuarios.find(user => req.params.email === user.email && req.params.senha === user.senha);
     res.send(usuario)
 })
 
 // direto
-app.get('/carros/', (reg, res) => {
+app.get('/carros/', (req, res) => {
     res.send(
     [
         {
@@ -81,6 +85,22 @@ app.get('/carros/', (reg, res) => {
             nome:'Audi'
         }
     ])
+})
+
+// com passagem de paramentros
+app.get('/carro/', (req, res) => {
+    const carros = 
+    [
+        {
+            nome: 'Ferrari'
+        },
+        {
+            nome: 'Audi'
+        }
+    ]
+
+    const carro = carros.find(car => car.nome === req.query.nome)
+    res.send(carro);
 })
 
 // define a porta de pool 
