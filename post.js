@@ -14,7 +14,7 @@ app.use(bodyParser.urlencoded({ extended: true}))
 app.use(bodyParser.json())
 
 app.get('/usuarios', (req, res) => {
-    res.send(usuarios);
+    res.status(200).send(usuarios);
 })
 
 // POST - []
@@ -27,8 +27,8 @@ app.post('/usuarios', (req, res) => {
     const usuario = req.body;
     // coloca esse valor no array de usuarios - append
     usuarios.push(usuario);
-    // devolve o usuario criado
-    res.send(usuario)
+    // devolve o status e o usuario criado
+    res.status(201).send(usuario)
 })
 
 // PUT atualiza uma informacao
@@ -43,9 +43,10 @@ app.put('/usuarios/:id', (req, res) => {
     // a funcao splice dado um indice, ele apaga 1 registro (atual) e sobrescreve na mesma posicao o conteudo do objeto usuario - ou seja, ela faz UGRADE de TODO o REGISTRO e nao de uma coluna/atributi
     usuarios.splice(index, 1, usuario);
     // apos substituir retorna o novo conteudo no mesmo index
-    res.send(usuario);
+    res.status(200).send(usuario);
 })
 
+// funcao callback que é executada quando o endpoint é referenciado
 app.delete('/usuarios/:id', (req, res) => {
     // como é uma atualizacao, é precisa achar o usuario cadastrado
     const index = usuarios.findIndex(user => user.id === ~~req.params.id);
@@ -55,7 +56,8 @@ app.delete('/usuarios/:id', (req, res) => {
     // a funcao splice dado um indice, ele apaga 1 registro (atual) e sobrescreve na mesma posicao o conteudo do objeto usuario - ou seja, ela faz UGRADE de TODO o REGISTRO e nao de uma coluna/atributi
     usuarios.splice(index, 1);
     // apos substituir retorna o novo conteudo no mesmo index
-    res.send(usuario);
+    //res.send(usuario);
+    res.status(204).send({ mensagem: 'usuário deletado com sucesso!'})
 })
 
 // define a porta de pool 
