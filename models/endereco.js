@@ -13,6 +13,8 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
       // relação 1 - 1
       // esse endereço pertence a uma pessoa
+      // sempre a tabela que tem a chave primaria - se referencia
+      // é belongsTo (pertence)
       Endereco.belongsTo(models.Pessoa, {foreignKey: 'pessoaId'})
     }
   }
