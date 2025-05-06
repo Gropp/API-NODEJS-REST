@@ -11,6 +11,7 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      // telefone tem uma chave estrangeira que pertence a pessoa
       Telefone.belongsTo(models.Pessoa,{foreignKey: 'pessoaId'})
     }
   }

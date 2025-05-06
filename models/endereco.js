@@ -15,6 +15,7 @@ module.exports = (sequelize, DataTypes) => {
       // esse endereço pertence a uma pessoa
       // sempre a tabela que tem a chave primaria - se referencia
       // é belongsTo (pertence)
+      // endereço tem uma chave estrangeira que pertence a pessoa
       Endereco.belongsTo(models.Pessoa, {foreignKey: 'pessoaId'})
     }
   }
