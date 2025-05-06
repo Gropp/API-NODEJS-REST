@@ -15,6 +15,7 @@ module.exports = (sequelize, DataTypes) => {
       // sempre a tabela que é referenciada por uma chave estrangeira - é dona has - tem
       // uma pessoa tem um endereço
         Pessoa.hasOne(models.Endereco, {foreignKey: 'pessoaId'})
+        Pessoa.hasMany(models.Telefone, {foreignKey: 'pessoaId'})
     }
   }
   Pessoa.init({
